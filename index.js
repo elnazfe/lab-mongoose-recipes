@@ -19,6 +19,35 @@ const manageRecipes = async () => {
     await Recipe.deleteMany();
 
     // Run your code here, after you have insured that the connection was made
+
+    const newRecipe = {
+      title: 'Spaghetti Carbonara',
+      level: 'Amateur Chef',
+      ingredients: ['spaghetti', 'pancetta', 'eggs', 'parmesan cheese', 'black pepper'],
+      cuisine: 'Italian',
+      dishType: 'main_course',
+      duration: 30,
+      creator: 'John Doe',
+    };
+
+    const recipe = await Recipe.create(newRecipe);
+    console.log(recipe);
+
+  // Iteration 3 : Insert multiple recipes / insertMany
+  let allRecipes = await Recipe.insertMany(data);
+  console.log(allRecipes);
+
+  // Iteration 4 : Update recipe / findOneAndUpdate
+    let updateRecipes = await Recipe.findOneAndUpdate({title: "Rigatoni alla Genovese"},{duraton: 100});
+    console.log(updateRecipes);
+
+  // Iteration 5 : Remove a recipe / deleteOne
+  let deleteRecipes = await Recipe.deleteOne({title: "carrotCake"});
+    console.log(deleteRecipes);
+
+  //Iteration 6 : Close the Database
+  mongoose.disconnect()
+
   } catch (error) {
     console.log(error);
   }
@@ -42,3 +71,5 @@ manageRecipes();
   .catch((error) => {
     console.error('Error connecting to the database', error);
   }); */
+
+  
